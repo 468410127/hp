@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- 强制Chromium内核，作用于360浏览器、QQ浏览器等国产双核浏览器 -->
+    <meta name="renderer" content="webkit"/>
+    <!-- 强制Chromium内核，作用于其他双核浏览器 -->
+    <meta name="force-rendering" content="webkit"/>
+    <!-- 如果有安装 Google Chrome Frame 插件则强制为Chromium内核，否则强制本机支持的最高版本IE内核，作用于IE浏览器 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- <link  href="https://github.com/thednp/kute.js/kute-css" rel="stylesheet"> -->
+
+    <title>vuecli3-ele-admin-template</title>
+    <style media="screen" type="text/css">
+    #loading {
+     display:flex;
+     justify-content: center;
+     align-items:center;
+     min-height: 100vh;
+     background: #000;
+      box-sizing: border-box;
+
+    }
+    #loading h1 {
+      position: relative;
+      font-size: 40px;
+      color: #222;
+      text-transform:uppercase;
+      border-bottom: 8px solid #222;
+      letter-spacing: 0.05em;
+      line-height: 1.2em;
+
+    }
+    #loading h1:before {
+      content:attr(data-text);
+      position: absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      color: #fec171;
+      border-bottom: 16px solid #fec171;
+      animation: animate 10s linear infinite;
+
+    }
+    @keyframes animate {
+      0%{
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+
+    }
+
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but vuecli3-ele-admin-template doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="loading">
+      <h1 data-text="risotech...">risotech...</h1>
+
+    </div>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
