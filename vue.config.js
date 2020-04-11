@@ -9,7 +9,10 @@ module.exports = {
 	outputDir: 'dist', // 输出文件目录
 	assetsDir: 'assets', // 静态资源文件夹
 	productionSourceMap: false,
+	lintOnSave: false,
 	devServer: {
+		// disableHostCheck: true,
+		host: '0.0.0.0',
 		port: 9566, // 端口号
 		open: true,
 		proxy: null // 设置代理
@@ -17,7 +20,6 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			sass: {
-				// 如果用的是less就改成less
 				javascriptEnabled: true,
 				data: `@import "./src/styles/variables.scss";`
 			},

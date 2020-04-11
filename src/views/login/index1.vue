@@ -1,338 +1,237 @@
 /* 首页 */
 <template>
     <div class="index-container">
-        <mv-full-page :pages="5" :page.sync="currentPage" :bg-arr="bgArr" :is-cache="true">
-            <template #page1>
-                <div class="first-page page page-1">
-                    <header class="header-wrapper" :class="{'open':isShowPhoneNav}">
-                        <div class="header">
-                            <div class="header-logo">
-                                <img src="../../assets/images/my-logo.png" alt />
+        <div class="section page-1">
+            <my-header header-background="#000" />
+            <section class="index-wrap">
+                <el-carousel :interval="5000" arrow="always" :autoplay="false">
+                    <el-carousel-item v-for="(item,index) in array" :key="index">
+                        <div class="carousel-title container">
+                            <div class="text">{{ item.tip }}</div>
+                            <div class="title">{{ item.title }}</div>
+                        </div>
+                        <ul class="text-animation" :class="isHidden == true ? 'hidden' :''">
+                            <li>R</li>
+                            <li>I</li>
+                            <li>S</li>
+                            <li>O</li>
+                            <li />
+                            <li>T</li>
+                            <li>E</li>
+                            <li>C</li>
+                            <li>H</li>
+                            <li>I</li>
+                            <li>0</li>
+                            <li>N</li>
+                        </ul>
+                    </el-carousel-item>
+                </el-carousel>
+            </section>
+        </div>
+        <div class="page-2">
+            <div class="second-wrap">
+                <div class="first-wrap container">
+                    <h3 data-aos="fade-up">企业情报</h3>
+                    <p data-aos="fade-down">{{ serviceTitle }}</p>
+                </div>
+            </div>
 
-                                <div class="logo-title">
-                                    <h3>risotech</h3>
-                                    <h3>risotech</h3>
-                                </div>
+            <div class="next-wrap container">
+                <div class="panel">
+                    <div class="panel-wrap">
+                        <div
+                            v-for="(item,index) in serviceData"
+                            :key="index"
+                            class="item"
+                            :data-aos="item.aos"
+                        >
+                            <div class="icon">
+                                <img :src="item.url" />
                             </div>
+                            <div class="content">
+                                <h3>{{ item.name }}</h3>
+                                <p>{{ item.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-3">
+            <div class="third-wrap container">
+                <div class="top-wrap">
+                    <div class="left">
+                        <h3 data-aos="fade-right">业务说明</h3>
+                        <h4 data-aos="fade-left">服务项目</h4>
+                    </div>
+                    <div class="right">
+                        <span />
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <nav class="web-nav">
-                                <ul>
-                                    <li>
-                                        <router-link :to="'/allCase'">企業情報</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="'index'">採用情報</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="'index'">案件概要</router-link>
-                                    </li>
-                                    <li>
-                                        <!-- 解决方案 -->
-                                        <router-link :to="'index'">ソリューション</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="'index'">NEWS</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link :to="'index'">問い合わせ</router-link>
-                                    </li>
-                                    <li class="lang-btn">
-                                        <button type="button">ENGLISH</button>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <span class="lang-button">
-                                <div class="lang" />
-                            </span>
-                            <div class="phone-nav">
-                                <div class="phone-nav-bar" @click="toggle()">
-                                    <em />
-                                    <em />
-                                    <em />
-                                </div>
-                                <div class="phone-nav-text-wrapper">
-                                    <ul>
-                                        <li>
-                                            <router-link :to="'index'">4444444</router-link>
-                                        </li>
-                                        <li>
-                                            <router-link :to="'index'">4444444</router-link>
-                                        </li>
-                                        <li>
-                                            <router-link :to="'index'">4444444</router-link>
-                                        </li>
-                                        <li>
-                                            <router-link :to="'index'">4444444</router-link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-                    <section class="index-wrap">
-                        <el-carousel :interval="5000" arrow="always" :autoplay="false">
-                            <el-carousel-item v-for="(item,index) in array" :key="index">
-                                <div
-                                    class="animated carousel-title"
-                                    :class="item.styleClass"
-                                >{{ item.doc }}</div>
-                                <div class="title">{{ item.title }}</div>
-                            </el-carousel-item>
-                        </el-carousel>
-                    </section>
+        <div class="type-wrap">
+            <div class="type container">
+                <div class="type-container">
+                    <div
+                        v-for="(item,index) in typeList"
+                        :key="index"
+                        class="item"
+                        :class="{active: active==index}"
+                        @click="handleClick(index,item)"
+                    >
+                        <a data-aos="zoom-out">
+                            <i class="my-icon el-icon-edit" />
+                            {{ item.name }}
+                        </a>
+                    </div>
                 </div>
-            </template>
+            </div>
+        </div>
+        <div class="about">
+            <div class="main-wrap container">
+                <div class="item">
+                    <div class="left" data-aos="zoom-in">
+                        <img :src="currentAboutData.img" />
+                    </div>
+                    <div class="right">
+                        <div class="title" data-aos="flip-up">{{ currentAboutData.name }}</div>
+                        <div class="introduce" data-aos="flip-up">{{ currentAboutData.introduce }}</div>
+                        <button class="btn" data-aos="flip-up">get start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-4">
+            <div class="four-wrap container">
+                <div class="caseTitle" data-aos="flip-up">導入事例</div>
+                <div class="tip" data-aos="flip-up">case</div>
+                <div class="panel">
+                    <div
+                        v-for="(item, index) in caseList"
+                        :key="index"
+                        class="item"
+                        :class="{selected:index==currentIndex}"
+                        :data-aos="item.aos"
+                        @click="toggleShow(index)"
+                    >
+                        <span class="icon-cont">
+                            <img :src="item.logo" class="fa fa-heart" alt />
+                        </span>
+                        <h3>{{ item.name }}</h3>
+                        <br />
+                        <div class="hidden">
+                            <div class="hidden-list">{{ item.introduce }}</div>
+                        </div>
+                        <br />
+                        <br />
+                        <a class="expend">
+                            <span class="plus">+</span>
+                            <span class="minus">-</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section page-6">
+            <div class="six-wrap container">
+                <div class="news">
+                    <h3>news news news news</h3>
+                    <div class="panel-list">
+                        <section class="panel">
+                            <div class="back">
+                                <i class="icon el-icon-user" />
+                                <div class="name">Support</div>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="back">
+                                <i class="icon el-icon-user" />
+                                <div class="name">Support</div>
+                            </div>
+                        </section>
+                        <section class="panel">
+                            <div class="back">
+                                <i class="icon el-icon-user" />
+                                <div class="name">Support</div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- <h3 class="nav">最近新闻资讯</h3> -->
 
-            <template #page2>
-                <div class="second-page page page-2">
-                    <div class="second-wrap">
-                        <div class="nav">ソリューション</div>
-                        <div class="panel">
-                            <div v-for="(item, index) in dataList" :key="index" class="item">
-                                <img :src="item.img" alt />
-                                <div class="content">
-                                    <div class="title">{{ item.title }}</div>
-                                    <div class="introduce">{{ item.introduce }}</div>
-                                </div>
+                <div class="timelime">
+                    <div class="timeline-body">
+                        <div v-for="(item,index) in newsData" :key="index" class="timeline-item">
+                            <p class="time">{{ item.time }}</p>
+                            <div class="content">
+                                <h2 class="title">{{ item.type }}</h2>
+                                <p>{{ item.content }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </template>
-            <template #page3>
-                <div class="third-page page page-3">
-                    <div class="third-wrap">
-                        <div class="nav">NEWS</div>
-                        <!-- <div class="panel">
-                            <ul>
-                                <li>
-                                    <h1>03</h1>
-                                    <span>javascript</span>
-                                    <a href="#">click me</a>
-                                </li>
-                                <li>
-                                    <h1>02</h1>
-                                    <span>javascript</span>
-                                    <a href="#">click me</a>
-                                </li>
-                                <li>
-                                    <h1>01</h1>
-                                    <span>javascript</span>
-                                    <a href="#">click me</a>
-                                </li>
-                            </ul>
-                        </div>-->
-                        <div class="message">
-                            <div
-                                v-for="(item,index) in newsList"
-                                :key="index"
-                                class="item"
-                                :class="'btn'+(index+1)"
-                            >
-                                <i class="el-icon-caret-bottom" />
-                                {{ item.title }}
-                            </div>
-                            <!-- <div class="item btn2">
-                <i class="el-icon-caret-bottom" />3333333333333333333333333
-              </div>
-              <div class="item btn3">3333333333333333333333333</div>
-              <div class="item btn4">3333333333333333333333333</div>
-              <div class="item btn5">3333333333333333333333333</div>
-                            <div class="item btn6">3333333333333333333333333</div>-->
-                        </div>
-                    </div>
-                </div>
-            </template>
-            <!-- <template #page4>
-                <div class="four-page page page-4">
-                    <div class="four-wrap">
-                        <div class="nav">公司资讯</div>
-                        <div class="panel">
-                            <div class="card">
-                                <div class="content">
-                                    <h2>1</h2>
-                                    <p>uuuuudddddddbbbcbbbbbbbbbb ddddelint</p>
-                                    <div class="more">read more</div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="content">
-                                    <h2>2</h2>
-                                    <p>uuuuudddddddbbbcbbbbbbbbb ddddelint</p>
-                                    <div class="more">read more</div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="content">
-                                    <h2>3</h2>
-                                    <p>uuuuudddddddbbbc bbbbbbbb ddddelint</p>
-                                    <div class="more">read more</div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="content">
-                                    <h2>4</h2>
-                                    <p>uuuuudddddddbbbc bbbbbbbbb ddddelint</p>
-                                    <div class="more">read more</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </template>-->
-            <template #page4>
-                <div class="five-page page page-5">
-                    <div class="five-wrap">
-                        <div class="panel">
-                            <div class="nav">企業情報</div>
-                            <div
-                                v-for="(item, index) in arr"
-                                :key="index"
-                                class="item"
-                                :class="{selected:index==currentIndex}"
-                                @click="toggleShow(index)"
-                            >
-                                <span class="icon-cont">
-                                    <i class="fa fa-heart" />
-                                </span>
-                                <h3>CREATIVE</h3>
-                                <br />
-                                <div class="hidden">
-                                    <div class="hidden-list">lorem ipsum dolor</div>
-                                    <div class="hidden-list">lorem ipsum dolor</div>
-                                    <div class="hidden-list">lorem ipsum dolor</div>
-                                    <div class="hidden-list">lorem ipsum dolor</div>
-                                </div>
-                                <br />
-                                <br />
-                                <a class="expend">
-                                    <span class="plus">+</span>
-                                    <span class="minus">-</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </template>
-            <template #page5>
-                <div class="six-page page page-6">
-                    <div class="six-wrap">
-                        <div class="icon" />
-                        <div class="btn">
-                            <div class="company-item">用户协议</div>
-                            <div class="company-item">用户协议</div>
-                            <div class="company-item">用户协议</div>
-                            <div class="company-item">用户协议</div>
-                        </div>
-                        <div class="company">
-                            <div class="company-name border">有限公司</div>
-                            <div class="company-address border">
-                                <p>地址</p>
-                                <p>东京</p>
-                            </div>
-                            <div class="company-email border">
-                                <p>地址</p>
-                                <p>东京</p>
-                            </div>
-                            <div class="company-map">
-                                <p>地址</p>
-                                <p>东京</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </mv-full-page>
+            </div>
+        </div>
+        <my-footer />
     </div>
 </template>
 
 <script>
-import { isMobile } from '@/assets/utils/validate'
 import 'animate.css'
-import MvFullPage from 'mv-full-page'
+import MyFooter from '@/components/MyFooter/index.vue'
+import MyHeader from '@/components/MyHeader/index.vue'
+import { indexData } from '@/assets/mock/indexData.js'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+AOS.init({
+  duration: 1200
+})
 export default {
   name: 'Index',
   components: {
-    MvFullPage
+
+    MyHeader,
+    MyFooter
   },
   data() {
     return {
-      currentPage: 1,
-      bgArr: ['#fff', '#fff', '#fff', '#fff', '#ea5420'],
-
+      isHidden: true,
+      serviceTitle: '',
+      serviceData: [],
+      typeList: [],
+      active: 0,
+      currentAboutData: null,
+      allAboutData: [],
+      caseList: [],
+      newsData: [],
+      options: {
+        // licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+        afterLoad: this.afterLoad,
+        scrollOverflow: true,
+        scrollBar: false,
+        autoscroll: false,
+        menu: '#menu',
+        lazyLoading: false,
+        scrollingSpeed: 300,
+        easing: 'easeInOutCubic',
+        css3: true,
+        sectionsColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#000']
+      },
       styleValue: '',
       isShowPhoneNav: false,
-      fullHeight: document.documentElement.clientHeight,
-      array: [
-        {
-          doc: '文案',
-          title: '内容1',
-          styleClass: 'bounce'
-        },
-        {
-          doc: '文案',
-          title: '内容2',
-          styleClass: 'bounce'
-        },
-        {
-          doc: '文案',
-          title: '内容3',
-          styleClass: 'bounce'
-        }, {
-          doc: '文案',
-          title: '内容4',
-          styleClass: 'bounce'
-        }, {
-
-          doc: '文案',
-          title: '内容5',
-          styleClass: 'bounce'
-        },
-        {
-
-          doc: '文案',
-          title: '内容5',
-          styleClass: 'bounce'
-        }
-      ],
+      array: [],
       dataList: [],
       arrList: [],
-      arr: [],
+
       isChoose: false,
       currentIndex: -1,
       height: 0,
       mouseX: 0,
       mouseY: 0,
-      isMobile: navigator.userAgent,
-      newsList: [
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        },
-        {
-          title: '新型コロナウイルスによる肺炎に対する当社の対策について'
-        }
-      ]
+      isMobile: navigator.userAgent
+
     }
   },
   computed: {
@@ -344,167 +243,37 @@ export default {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
-    },
-    fullHeight(val) {
-      if (!this.timer) {
-        this.fullHeight = val
-        this.timer = true
-        // let that = this;
-        setInterval(() => {
-          this.timer = false
-        }, 400) // 防止过度调用监测事件，导致卡顿
-      }
-    },
-    isMobile(val) {
-      console.log(val, 'val')
-
-      if (isMobile()) {
-        this.styleValue = ''
-      } else {
-        this.styleValue = 'height:' + this.fullHeight + 'px;'
-      }
     }
+
   },
   mounted() {
-    this.getBodyHeight()
+    setTimeout(() => {
+      this.isHidden = false
+    }, 500)
   },
   created() {
-    if (isMobile()) {
-      this.styleValue = ''
-    } else {
-      this.styleValue = 'height:' + this.fullHeight + 'px;'
-    }
-    // console.log(isMobile(), 'isMobile()')
-
-    this.init()
-    this.dataList = [
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '金融業界向けサービス',
-        introduce: '私たち富士ソフトは、最先端のテクノロジーを駆使し、金融業界に携わる企業様の、様々な業務課題の解決に向けた技術サポートを、ワンストップで提供しています'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: 'クラウドサービス',
-        introduce: '为全クラウドインテグレーターとして、システム運用につきまとうさまざまな負担からの開放、生産性の向上、環境改善を実現し、コストダウンと安心安全なＩＴシステムをご提供します球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: 'AWS ソリューション',
-        introduce: '豊富な導入実績により、AWS環境を充実させるサービスをご用意しております。 設計・開発から保守運用までトータルでお客様環境をサポートします'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: 'Microsoft ソリューション',
-        introduce: '製品知識、業務ノウハウをあわせ持った技術者がMicrosoft製品を活用し、お客様の経営課題解決のための情報基盤構築を全面的にサポートします'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: 'セキュリティ',
-        introduce: '富士ソフトのセキュリティエンジニアがセキュリティ対策をトータルにサポートいたします'
-      }
-    ]
-    this.arrList = [
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: 'その他のソリューション',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据2',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据3',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      }
-    ]
-    this.arr = [
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据2',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据3',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      }, {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      },
-      {
-        img: require('../../assets/images/carousel.jpg'),
-        title: '大数据4',
-        introduce: '为全球某33333'
-      }
-    ]
+    const data = indexData
+    this.array = data.firstSection
+    this.serviceTitle = data.secondsSection.title
+    this.serviceData = data.secondsSection.serviceData
+    this.typeList = data.thirdSection.type
+    this.allAboutData = data.thirdSection.aboutData
+    this.currentAboutData = this.allAboutData[this.active]
+    this.caseList = data.fourSection.caseList
+    this.newsData = data.fiveSection.newsList
   },
   methods: {
-    getBodyHeight() {
-      const that = this
-      window.onresize = () => {
-        return (() => {
-          window.fullHeight = document.documentElement.clientHeight
-          that.fullHeight = window.fullHeight
-        })()
-      }
-    },
-    init() {
-    },
-    handleMouseMove(e) {
-      // e.pageX 鼠标在body的x轴坐标位置
-      // this.$refs.card.offsetLeft 外层卡片容器与body的左侧距离
-      // e.pageX - this.$refs.card.offsetLeft 鼠标所在容器内的x轴坐标位置
-      // e.pageX - this.$refs.card.offsetLeft - this.width / 2 鼠标以容器中心点为原点的x轴位置
-      this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width / 2
-      this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height / 2
-    },
-    // 当鼠标进入时清除计时器
-    handleMouseEnter() {
-      clearTimeout(this.mouseLeaveDelay)
-    },
-    // 当鼠标离开时添加定时器
-    handleMouseLeave() {
-      this.mouseLeaveDelay = setTimeout(() => {
-        this.mouseX = 0
-        this.mouseY = 0
-      }, 1000)
-    },
+
     toggleShow(index) {
     //   this.isChoose = !this.isChoose
       this.currentIndex = index
     },
     toggle() {
       this.isShowPhoneNav = !this.isShowPhoneNav
+    },
+    handleClick(index, item) {
+      this.active = index
+      this.currentAboutData = this.allAboutData[this.active]
     }
 
   }
@@ -517,84 +286,46 @@ export default {
 // @import "~@/styles/header";
 
 .index-container {
-    .nav {
-        // width:
-        text-align: center;
-        line-height: 50px;
-        font-weight: bold;
-        font-size: 20px;
-        border-bottom: 2px solid $activeColor;
-        margin: 0 40%;
-        margin-bottom: 20px;
-    }
-    // position: relative;
-    .first-page {
+    .section {
+        position: relative;
         width: 100%;
-        // border: 1px solid red;
-        box-sizing: border-box;
-        height: 100%;
+        min-height: 100vh;
+    }
 
-        // height: 400px;
-        // background: gray;
+    .page-1 {
+        box-sizing: border-box;
         .header-wrapper {
             width: 100%;
-            // border: 1px solid red;
             box-sizing: border-box;
             position: relative;
             z-index: 99;
         }
         .index-wrap {
-            // bottom: 0;
-            // width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            margin-top: -90px;
-            // z-index: 2;
+            // margin-top: -90px;
+            box-sizing: border-box;
             /deep/ .el-carousel {
                 height: 100%;
             }
             /deep/ .el-carousel__container {
                 height: 100%;
             }
+            /deep/ .el-carousel__item {
+                opacity: 0.4;
+            }
             /deep/ .el-carousel__item:nth-child(2) {
                 background: url("../../assets/images/carousel.jpg") no-repeat;
                 background-size: cover;
                 box-sizing: border-box;
-                // border: 1px solid red;
-                // h3 {
-                //     color: green;
-                //     animation: lefteaseinAnimate 5s ease 1; /*调用已定义好的动画lefteaseinAnimate，全程运行时间1S，进入的速度曲线为ease，只播放一次*/
-                //     -webkit-animation: lefteaseinAnimate 5s ease 1;
-                //     -ms-animation: lefteaseinAnimate 5s ease 1;
-                //     -o-animation: lefteaseinAnimate 5s ease 1;
-                //     -moz-animation: lefteaseinAnimate 5s ease 1;
-
-                //     /*规定动画的最后状态为结束状态*/
-                //     animation-fill-mode: forwards;
-                //     -webkit-animation-fill-mode: forwards;
-                //     -o-animation-fill-mode: forwards;
-                //     -ms-animation-fill-mode: forwards;
-                //     -moz-animation-fill-mode: forwards;
-                // }
             }
             /deep/ .el-carousel__item:nth-child(3) {
                 background: url("../../assets/images/carousel.jpg") no-repeat;
                 background-size: cover;
                 box-sizing: border-box;
-                // h3 {
-                //     color: green;
-                //     animation: lefteaseinAnimate 1s ease 1; /*调用已定义好的动画lefteaseinAnimate，全程运行时间1S，进入的速度曲线为ease，只播放一次*/
-                //     -webkit-animation: lefteaseinAnimate 1s ease 1;
-                //     -ms-animation: lefteaseinAnimate 1s ease 1;
-                //     -o-animation: lefteaseinAnimate 1s ease 1;
-                //     -moz-animation: lefteaseinAnimate 1s ease 1;
-
-                //     /*规定动画的最后状态为结束状态*/
-                //     animation-fill-mode: forwards;
-                //     -webkit-animation-fill-mode: forwards;
-                //     -o-animation-fill-mode: forwards;
-                //     -ms-animation-fill-mode: forwards;
-                //     -moz-animation-fill-mode: forwards;
-                // }
             }
             /deep/ .el-carousel__item:nth-child(4) {
                 background: url("../../assets/images/carousel2.jpg") no-repeat;
@@ -618,331 +349,263 @@ export default {
             }
 
             /deep/ .el-carousel__item .carousel-title {
-                font-size: 28px;
-
-                line-height: 150px;
                 text-align: center;
                 position: relative;
                 transform: translateY(-50%);
                 top: 50%;
                 margin: 0 auto;
-
-                font-size: 28px;
-            }
-        }
-    }
-    .second-page {
-        // border: 1px solid red;
-        width: 100%;
-        box-sizing: border-box;
-        .second-wrap {
-            width: 100%;
-            max-width: 1200px;
-            position: relative;
-            border-radius: 6px;
-            padding: 20px 24px 0px;
-            margin: auto;
-
-            height: 100%;
-            box-sizing: border-box;
-            position: relative;
-            .panel {
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: space-between;
-                box-sizing: border-box;
-
-                .item {
-                    box-sizing: border-box;
-                    width: calc(100% / 4 - 20px);
-                    margin-right: 20px;
-                    margin-bottom: 40px;
-                    // border: 1px solid red;
-                    transform: translateY(0px);
-                    position: relative;
-                    will-change: transform, box-shadow;
-                    transition: transform 0.3s
-                            cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
-                        box-shadow 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
-                        -webkit-transform 0.3s cubic-bezier(
-                                0.215,
-                                0.61,
-                                0.355,
-                                1
-                            ) 0s,
-                        -webkit-box-shadow 0.3s cubic-bezier(
-                                0.215,
-                                0.61,
-                                0.355,
-                                1
-                            ) 0s;
-                    border-width: initial;
-                    border-style: none;
-                    border-color: initial;
-                    border-image: initial;
-                    border-radius: 0px;
-
-                    img {
-                        width: 100%;
-                        height: 300px;
-                        background-size: cover;
-                        transition: all 0.5s;
-                    }
-                    .content {
-                        font-size: 18px;
-                        background: #fff;
-                        color: rgb(102, 102, 102);
-                        padding: 10px 20px;
-                        .title {
-                            line-height: 42px;
-                            @include ellipse;
-                        }
-                        .introduce {
-                            line-height: 28px;
-                            @include line-ellipse(2);
-                        }
-                    }
+                .text {
+                    font-size: 38px;
+                    margin: 20px 0;
                 }
-                .item:nth-child(4n) {
-                    width: 25%;
+                .title {
+                    color: #fff;
+                    font-size: 40px;
+                }
+            }
+            .text-animation {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-top: -10%;
+                li {
+                    display: inline-block;
+                    margin-right: 5px;
+                    font-weight: 700;
+                    font-size: 50px;
+                    color: #000;
+                    opacity: 1;
+                    transition: all 2.5s ease;
+                }
+                li:last-child {
                     margin-right: 0;
                 }
-                .item:hover {
-                    cursor: pointer;
-                    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
-                        0 0 20px rgba(0, 0, 0, 0.1) inset;
-                    transform: scale(1.05);
+            }
+            .text-animation.hidden {
+                opacity: 1;
+                li:nth-child(1) {
+                    transform: translateX(-200px) translateY(-200px);
                 }
-                // .item img:hover {
-                //     transform: scale(1.05);
-                // }
+                li:nth-child(2) {
+                    transform: translateX(20px) translateY(100px);
+                }
+                li:nth-child(3) {
+                    transform: translateX(-150px) translateY(-80px);
+                }
+                li:nth-child(4) {
+                    transform: translateX(10px) translateY(-200px);
+                }
+                li:nth-child(5) {
+                    transform: translateX(-300px) translateY(200px);
+                }
+                li:nth-child(6) {
+                    transform: translateX(20px) translateY(-20px);
+                }
+                li:nth-child(7) {
+                    transform: translateX(30px) translateY(200px);
+                }
+                li:nth-child(8) {
+                    transform: translateX(-200px) translateY(-200px);
+                }
+                li:nth-child(9) {
+                    transform: translateX(20px) translateY(100px);
+                }
+                li:nth-child(10) {
+                    transform: translateX(-150px) translateY(-80px);
+                }
+                li:nth-child(11) {
+                    transform: translateX(10px) translateY(-200px);
+                }
+                li:nth-child(12) {
+                    transform: translateX(-300px) translateY(200px);
+                }
             }
         }
     }
-    .third-page {
+    .page-2 {
+        width: 100%;
+        min-height: 100vh;
+        // height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        .second-wrap {
+            // width: 100%;
+            // height: 50%;
+            // // background: #000;
+            // position: absolute;
+            // top: 0;
+            // left: 0;
+            .first-wrap {
+                padding: 40px 0;
+                width: 60%;
+                margin: 0 auto;
+
+                h3 {
+                    text-align: center;
+                    color: #1f1f1f;
+
+                    padding: 40px 0;
+
+                    font-size: 34px;
+                }
+                p {
+                    margin: 0 40px;
+                    font-size: 22px;
+                    line-height: 30px;
+                    text-align: center;
+                }
+            }
+        }
+        .next-wrap {
+            padding: 20px 0;
+            .panel {
+                position: relative;
+                height: 100%;
+                .panel-wrap {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-content: space-between;
+                    .item {
+                        width: 32%;
+                        margin-right: 2%;
+                        // height: 50%;
+                        position: relative;
+                        box-sizing: border-box;
+                        overflow: hidden;
+                        background: #fff;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        box-sizing: border-box;
+                        cursor: pointer;
+                        // border: 1px solid red;
+                        padding: 0 20px 20px 20px;
+                        .icon {
+                            width: 100%;
+                            height: 200px;
+                            // padding: 30px;
+                            box-sizing: border-box;
+                            img {
+                                width: 100%;
+                                height: 200px;
+                                background-size: cover;
+                                transition: all 0.5s;
+                            }
+                        }
+                        .content {
+                            width: 100%;
+                            // height: 20%;
+                            font-size: 26px;
+                            color: #333;
+                            padding: 20px 0;
+
+                            h3 {
+                                font-size: 20px;
+                                height: 100%;
+                                line-height: 100%;
+                                text-align: left;
+                                margin-bottom: 10px;
+                            }
+                            p {
+                                font-size: 18px;
+                                color: #9c9c9c;
+                                text-align: left;
+                            }
+                        }
+                    }
+
+                    .item:nth-child(3n) {
+                        margin-right: 0;
+                    }
+                    .item:hover {
+                        img {
+                            transform: scale(1.05);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .page-3 {
         width: 100%;
         position: relative;
-
-        // border: 1px solid green;
         box-sizing: border-box;
         overflow: hidden;
         .third-wrap {
-            padding: 20px 24px 0 24px;
-            height: 100%;
+            max-width: $marginWidth;
+            margin: 0 auto;
+
             box-sizing: border-box;
-            // position: relative;
+            .top-wrap {
+                display: flex;
 
-            h3 {
-                line-height: 40px;
-                text-align: center;
+                padding: 40px;
+                .left {
+                    width: 50%;
+                    h3 {
+                        font-size: 40px;
+                    }
+                    h4 {
+                        font-size: 36px;
+                    }
+                }
+                .right {
+                    width: 50%;
+                    span {
+                        font-size: 28px;
+                        margin-top: 30px;
+                    }
+                }
             }
-            .panel {
-                height: 100%;
 
+            .next-wrap {
                 width: 100%;
+                position: relative;
 
-                // border: 1px solid green;
-                ul {
-                    position: relative;
-                    transform: translateY(-50%);
-                    top: 50%;
-                    margin: 0 auto;
-                    text-align: center;
-                    li {
-                        display: block;
-                        position: absolute;
-                        background: #fefefe;
-                        width: 250px;
-                        height: 320px;
-                        top: 0;
-                        left: 0;
-                        transform: rotate(10deg) skew(-60deg);
-                        transform-origin: bottom center;
-                        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-                        transition: 0.4s;
-                        z-index: -1;
-                        overflow: hidden;
-                        h1 {
-                            font-size: 7.2em;
-                            background: -webkit-linear-gradient(#28fff7);
-                            // -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            margin-top: 50px;
-                            transition: 0.4s;
+                .main-wrap {
+                    height: 100%;
+                    border: 1px solid yellow;
+                    box-sizing: border-box;
+                    margin-top: 100px;
+
+                    width: 100%;
+                    .item {
+                        display: flex;
+                        height: 100%;
+                        .left {
+                            width: 60%;
+                            height: 100%;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                background-size: cover;
+                            }
                         }
-                        span {
+                        .right {
+                            flex: 1;
+                            height: 100%;
+                            padding-top: 20%;
+                            background: #9c9c9c;
+                            padding: 0 40px;
+                            box-sizing: border-box;
+                            color: #fff;
+                            .title {
+                                margin-top: 40%;
+                                font-size: 30px;
+                                padding-bottom: 20px;
+                            }
+                            .introduce {
+                                font-size: 28px;
+                                line-height: 38px;
+                            }
                         }
                     }
-                    li::after {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 10px;
-                        background: rgb(40, 255, 247);
-                        background: linear-gradient(
-                            45deg,
-                            rgba(40, 255, 247, 1) 0%,
-                            rgba(120, 40, 255, 1) 100%
-                        );
-                        transform: 0.5s;
-                    }
-                }
-
-                .text {
-                    // width: 300px;
-                    padding: 100px 20px 0 120px;
-                    .title {
-                        font-size: 26px;
-                    }
-                    .tip {
-                        line-height: 32px;
-                        font-size: 24px;
-                        color: rgb(185, 185, 185);
-                    }
-                    .introduce {
-                        font-size: 22px;
-                        line-height: 20px;
-                    }
                 }
             }
-            .message {
-                margin: 20%;
-                // background: #ccc;
-                // position: absolute;
-                // top: 50%;
-                // left: 50%;
-                // transform: translate(-50%, -50%);
-                .item {
-                    position: relative;
-                    // color: #000;
-                    font-size: 18px;
-                    // margin: 30px 0;
-                    // border: 2px solid #ff7675;
-                    // padding: 14px 50px;
-                    text-transform: uppercase;
-                    overflow: hidden;
-                    transition: 1s all ease;
-                    cursor: pointer;
-                    height: 60px;
-                    line-height: 60px;
-                    // background: #f3f3f3;
-                    // color: #333;
-                    border-bottom: 1px solid #fff;
-                    padding: 0 20px;
-                    // color: #fff;
-                }
-                .item::before {
-                    background: $activeColor;
-                    content: "";
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: -1;
-                    transition: 0.5s all ease;
-                    color: #fff;
-                }
-                .btn1::before {
-                    width: 0;
-                    height: 100%;
-                    // background: $activeColor;
-                    //  background: #ff7675;
-                }
-                .btn1:hover::before {
-                    width: 100%;
-                    color: #fff;
-                    // background: $activeColor;
-                    // background: #ff7675;
-                }
-                .btn2::before {
-                    width: 100%;
-                    height: 0;
-                }
-                .btn2:hover::before {
-                    height: 100%;
-                }
-                .btn3::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn3:hover::before {
-                    height: 100%;
-                }
-                .btn4::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn4:hover::before {
-                    height: 100%;
-                }
-                .btn5::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn5:hover::before {
-                    height: 100%;
-                }
-                .btn6::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn6:hover::before {
-                    height: 100%;
-                }
-                .btn7::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn7:hover::before {
-                    height: 100%;
-                }
-                .btn8:before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn8:hover::before {
-                    height: 100%;
-                }
-                .btn9::before {
-                    width: 100%;
-                    height: 0;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-                .btn9:hover::before {
-                    height: 100%;
-                }
-            }
+            // position: relative;
         }
 
-        .logo-title {
-            position: relative;
-            // font-family: "Poppins", sans-serif;
-            h3 {
-                position: absolute;
-                color: #fff;
-                // transform: translate(-50%, -50%);
-                font-size: 8em;
-            }
-        }
-        .logo-title h3:nth-child(1) {
-            color: transparent;
-            -webkit-text-stroke: 2px #03a9f4;
-        }
-        .logo-title h3:nth-child(2) {
-            color: #03a9f4;
-            animation: animate 4s ease-in-out infinite;
-        }
         @keyframes animate {
             0%,
             100% {
@@ -973,107 +636,144 @@ export default {
             }
         }
     }
-    .four-page {
+    .type-wrap {
         width: 100%;
-        box-sizing: border-box;
+        border-bottom: 1px solid #e5e7f2;
+        .type {
+            padding: 0 20px;
 
-        .four-wrap {
-            padding: 50px 24px;
-            box-sizing: border-box;
-            // border: 1px solid red;
-            .panel {
+            .type-container {
+                width: 50%;
+                margin: 0 auto;
                 display: flex;
+                align-items: center;
+                // background: yellowgreen;
                 justify-content: center;
-                flex-wrap: wrap;
-                transform: 0.5s;
-                position: relative;
-                width: 100%;
-                .card {
-                    position: relative;
-                    width: 20%;
-                    height: 300px;
-                    background: #fff;
+                box-sizing: border-box;
+                .item {
+                    width: 30%;
+                    margin: 0 auto;
+                    text-align: center;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    transform: 0.5s;
+                    font-size: 20px;
+                    cursor: pointer;
 
-                    .content {
-                        text-align: center;
-                        z-index: 4;
-                        padding: 0 20px;
-                        transition: 0.5s;
-                        h2 {
-                            font-size: 3em;
-                        }
-                        p {
-                            font-size: 0.9em;
-                        }
-                        .more {
-                            margin-top: 15px;
-                            padding: 5px 10px;
-                            background: #262626;
-                            color: #fff;
-                            text-decoration: none;
-                        }
+                    color: #000;
+
+                    margin-right: 5%;
+                    a {
+                        display: block;
+                        padding-bottom: 20px;
                     }
                 }
-                .card:hover {
-                    .content {
-                        color: #fff;
-                        .more {
-                            background: #2196f3;
-                        }
+                .item.active {
+                    color: $activeColor;
+                    a {
+                        border-bottom: 2px solid $activeColor;
                     }
+                    // background: #000;
                 }
-                .card:hover {
-                    filter: blur(0px);
-                    transform: scaleY(1);
-                }
-                .card:before {
-                    content: "";
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background: #fff;
-                    z-index: 1;
-                    transition: 0.5s;
-                }
-                .card:hover:before {
-                    background: #000;
-                    transform: scaleY(1.15);
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                }
-            }
-            .panel:hover {
-                .card {
-                    filter: blur(5px);
-                    transform: scaleY(0.7);
+                .item:nth-child(3n) {
+                    margin-right: 0;
                 }
             }
         }
     }
-    .five-page {
+
+    .about {
+        width: 100%;
+        position: relative;
+        background: #f7f7f7;
+        padding: 100px 0;
+
+        .main-wrap {
+            width: 100%;
+            .item {
+                display: flex;
+                height: 100%;
+                .left {
+                    width: 60%;
+                    height: 100%;
+
+                    img {
+                        width: 100%;
+                        height: 540px;
+                        background-size: cover;
+                    }
+                }
+                .right {
+                    flex: 1;
+                    height: 100%;
+                    padding-top: 20%;
+                    padding: 0 40px;
+                    box-sizing: border-box;
+                    // color: #fff;
+                    .title {
+                        margin-top: 20px;
+                        font-size: 28px;
+                        padding-bottom: 20px;
+                    }
+                    .introduce {
+                        font-size: 22px;
+                        line-height: 38px;
+                        color: $textGray;
+                    }
+                }
+            }
+        }
+    }
+    .btn {
+        background: $activeColor;
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 30px;
+        margin-top: 30px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    .btn:hover {
+        color: $activeColor;
+        background: #fff;
+        border: 1px solid $activeColor;
+    }
+
+    .page-4 {
         width: 100%;
         box-sizing: border-box;
+        height: 100%;
+        overflow: hidden;
 
-        .five-wrap {
-            padding: 20px 24px 0 24px;
+        .four-wrap {
+            max-width: $marginWidth;
+            margin: 0 auto;
             height: 100%;
             box-sizing: border-box;
-            border: 1px solid red;
+            .caseTitle {
+                padding: 20px;
+
+                // line-height: 40px;
+                font-size: 40px;
+            }
+            .tip {
+                font-size: 28px;
+                padding: 0 20px 40px 20px;
+            }
             .panel {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+
                 .item {
                     width: 23.5%;
-                    height: 250px;
+                    height: 300px;
                     margin-right: 2%;
                     padding: 15px;
                     box-sizing: border-box;
-                    // display: inline-block;
-                    background: deepskyblue;
+
+                    background: lightskyblue;
                     position: relative;
                     cursor: pointer;
                     overflow: hidden;
@@ -1087,7 +787,7 @@ export default {
                         margin: 20px auto;
                         display: block;
                         text-align: center;
-                        position: absolute;
+                        // position: absolute;
                         top: 10px;
                         left: 0;
                         right: 0;
@@ -1095,27 +795,31 @@ export default {
                         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5),
                             0 0 0 0 rgba(3, 108, 129, 0.5);
 
-                        i {
+                        img {
                             color: white;
-                            opacity: 0.5;
-                            font-size: 2.5rem;
-                            line-height: 75px;
+                            // opacity: 0.5;
+                            position: absolute;
+                            left: 0;
+                            width: 100%;
+                            // font-size: 2.5rem;
+                            // line-height: 75px;
                         }
                     }
                     h3 {
                         color: white;
                         font-family: tahoma;
                         font-weight: 300;
-                        font-size: 24px;
+                        font-size: 22px;
                         text-align: center;
                         text-transform: uppercase;
                         letter-spacing: 2px;
-                        padding: 15px;
+                        padding: 20px 15px;
                         border-bottom: 1px solid rgba(255, 255, 255, 0);
                         position: absolute;
                         top: 95px;
-                        width: 70%;
+                        width: 80%;
                         left: 10%;
+
                         z-index: 4;
                     }
                     .hidden {
@@ -1206,13 +910,16 @@ export default {
                     h3 {
                         padding: 32px 15px 15px 15px;
                         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-                        width: 70%;
+                        width: 80%;
                         top: 17px;
                         left: 10%;
                     }
                     .hidden {
                         opacity: 1;
-                        margin-top: 95px;
+                        margin-top: 105px;
+                        .hidden-list {
+                            margin-left: 10%;
+                        }
                     }
                 }
                 .selected:hover {
@@ -1223,10 +930,11 @@ export default {
             }
         }
     }
-    .six-page {
-        color: #fff;
-        line-height: 1.6;
-        .six-wrap {
+    .page-5 {
+        width: 100%;
+        box-sizing: border-box;
+
+        .five-wrap {
             margin: 0 8%;
             margin-top: 200px;
             .icon {
@@ -1283,20 +991,142 @@ export default {
             }
         }
     }
-    .footer {
-        width: 100%;
+    .page-6 {
+        position: relative;
+        // line-height: 1.6;
+        .six-wrap {
+            .news {
+                width: 100%;
+                overflow: hidden;
+                margin-top: 40px;
+                h3 {
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+                .panel-list {
+                    margin: 40px 0;
+                    max-width: 100%;
+                    display: flex;
+                    box-sizing: border-box;
+                    .panel {
+                        width: 32%;
+                        margin-right: 5%;
+                        height: 160px;
+                        display: flex;
+                        // background: #fff;
+                        text-align: left;
+                        padding: 0;
+                        border-radius: 10px;
+                        transition: 0.25s;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        border: 1px solid #e5e7f2;
+                        padding: 30px;
+                        margin-bottom: 30px;
+                        // overflow: hidden;
+                        // padding-bottom: 0;
+                        box-sizing: border-box;
+                        .back {
+                            .icon {
+                                margin: 0 auto;
+                                border: 1px solid #e5e7f2;
+                                text-align: center;
+                                border-radius: 4px;
+                                font-size: 36px;
+                                transition: all 250ms ease-in-out;
+                                box-shadow: 0 0 27px 0 rgba(0, 0, 0, 0.045);
+                                width: 64px;
+                                height: 64px;
+                                line-height: 64px;
+                                margin-bottom: 25px;
+                                color: $activeColor;
+                            }
+                            .name {
+                                // color: red;
+                                font-size: 20px;
+                                // padding-bottom: 10px;
+                            }
+                        }
 
-        .footer-wrap {
-            height: 240px;
-            min-width: 980px;
-            margin: 0 auto;
-            background: #000;
+                        img {
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            .nav {
+                color: #000;
+                font-size: 20px;
+                padding: 40px 0;
+            }
+            .timelime {
+                color: #000;
+                width: 100%;
+                margin: 0 auto;
+                .timeline-body {
+                    position: relative;
+                    background: #fff;
+                    margin-left: 100px;
+                    border-radius: 0 8px 8px 0;
+                    padding: 5px 0;
+                    &:after {
+                        content: "";
+                        width: 4px;
+                        height: 100%;
+                        background: $activeColor;
+                        position: absolute;
+                        left: -4px;
+                        top: 0;
+                    }
+                    .timeline-item {
+                        position: relative;
+                        &:after {
+                            content: "";
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            border: 4px solid $activeColor;
+                            background: #fff;
+                            position: absolute;
+                            top: 0px;
+                            left: -12px;
+                            z-index: 9;
+                        }
+                        .time {
+                            position: absolute;
+                            left: -120px;
+                            top: 4px;
+                            opacity: 0.5;
+                            font-size: 18px;
+                            color: #000;
+                        }
+                        .content {
+                            margin: 20px 20px 0 20px;
+                            padding-bottom: 40px;
+                            border-bottom: 1px dashed #555;
+                            .title {
+                                font-weight: 500;
+                                margin-bottom: 15px;
+                                width: 120px;
+                                border: 1px solid $activeColor;
+                                border-radius: 10px;
+                                padding: 10px 0;
+                                text-align: center;
+                            }
+                            p {
+                                font-size: 24px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
 @media only screen and (max-width: 767.99px) {
     .index-container {
-        .second-page {
+        .page-2 {
             // border: 1px solid green;
             box-sizing: border-box;
             .second-wrap {
@@ -1341,7 +1171,7 @@ export default {
                 }
             }
         }
-        .third-page {
+        .page-3 {
             width: 100%;
             position: relative;
 
@@ -1471,7 +1301,7 @@ export default {
                 }
             }
         }
-        .five-page {
+        .page-5 {
             width: 100%;
             box-sizing: border-box;
 

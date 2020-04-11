@@ -8,7 +8,7 @@
 	z-index: 99;
 	transition: background .3s cubic-bezier(.215, .61, .355, 1), border .45s cubic-bezier(.215, .61, .355, 1);
 	.header {
-		max-width: 1200px;
+		max-width: $marginWidth;
 		width: 100%;
 		padding: 0 24px;
 

@@ -4,17 +4,17 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export const constantRoutes = [
-	{
-		path: '/redirect',
-		component: () => import('@/layout'),
-		hidden: true,
-		children: [
-			{
-				path: '/redirect/:path*',
-				component: (resolve) => void require([ '@/views/redirect/index' ], resolve)
-			}
-		]
-	},
+	// {
+	// 	path: '/redirect',
+	// 	component: () => import('@/layout'),
+	// 	hidden: true,
+	// 	children: [
+	// 		{
+	// 			path: '/redirect/:path*',
+	// 			component: (resolve) => void require([ '@/views/redirect/index' ], resolve)
+	// 		}
+	// 	]
+	// },
 	{
 		path: '/',
 		redirect: '/index'
@@ -34,7 +34,15 @@ export const constantRoutes = [
 	{
 		path: '/allCase',
 		name: 'AllCase',
+		label: '案件概要',
 		component: (resolve) => void require([ '@/views/allCase' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/service',
+		name: 'Service',
+		label: '解决方案，商业服务',
+		component: (resolve) => void require([ '@/views/service' ], resolve),
 		hidden: true
 	},
 	{
@@ -44,9 +52,42 @@ export const constantRoutes = [
 		hidden: true
 	},
 	{
-		path: '/register',
-		name: 'Register',
-		component: (resolve) => void require([ '@/views/login/register' ], resolve),
+		path: '/product',
+		name: 'Product',
+		component: (resolve) => void require([ '@/views/product/index' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/news',
+		name: 'News',
+		label: '咨讯',
+		component: (resolve) => void require([ '@/views/news/index' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/join',
+		name: 'Join',
+		component: (resolve) => void require([ '@/views/join/index' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/detail',
+		name: 'Detail',
+		component: (resolve) => void require([ '@/views/allCase/detail' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/recruit',
+		name: 'Recruit',
+		label: '采用情报',
+		component: (resolve) => void require([ '@/views/recruit/index' ], resolve),
+		hidden: true
+	},
+	{
+		path: '/company',
+		name: 'Company',
+		label: '企业情报',
+		component: (resolve) => void require([ '@/views/company/index' ], resolve),
 		hidden: true
 	},
 	{
@@ -110,7 +151,7 @@ export const notFoundRoutes = [
 
 const createRouter = () =>
 	new Router({
-		// mode: 'history', // require service support
+		mode: 'history', // require service support
 		scrollBehavior: () => ({ y: 0 }),
 		routes: constantRoutes
 	});

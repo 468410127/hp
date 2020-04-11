@@ -21,6 +21,15 @@ import directives from '@/assets/utils/directives';
 import 'mv-full-page/lib-dist/mv-full-page.css';
 import MvFullPage from 'mv-full-page';
 
+import 'fullpage.js/vendors/scrolloverflow';
+import VueFullPage from 'vue-fullpage.js';
+// ...
+
+Vue.use(VueFullPage);
+// import 'swiper/dist/css/swiper.css';
+// import VueSwiper from 'vue-awesome-swiper';
+// Vue.use(VueSwiper);
+
 Vue.use(MvFullPage);
 Vue.use(directives);
 // import 'kute.js';

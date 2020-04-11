@@ -111,3 +111,29 @@ textarea::-webkit-input-placeholder {
 textarea:-ms-input-placeholder {
 	color: rgb(204, 204, 204);
 } // ie
+
+.active-text {
+	color: $activeColor;
+}
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $marginWidth;
+}
+h3 {
+	color: #1f1f1f;
+	font-size: 34px;
+	font-weight: normal;
+}
+.background-gray {
+	background: #f7f9fb;
+}
+h6 {
+	font-size: 18px;
+	color: $textGray;
+	line-height: 1.6;
+	font-weight: 400;
+}
+.importColor {
+	font-weight: bold;
+}

@@ -3,30 +3,37 @@
         <header class="header-wrapper" :class="{'open':isShowPhoneNav}">
             <div class="header">
                 <div class="header-logo">
-                    <img src="../../assets/images/my-logo.png" alt />
+                    <img src="../../assets/images/my-logo.png" alt @click="handleJump('/index')" />
 
-                    <div class="logo-title">
+                    <!-- <div class="logo-title">
                         <h3>risotech</h3>
                         <h3>risotech</h3>
-                    </div>
+                    </div>-->
                 </div>
 
                 <nav class="web-nav">
                     <ul>
                         <li>
-                            <router-link :to="'/allCase'">案件</router-link>
+                            <router-link :to="'company'" :style="{'color':headerBackground}">企業情報</router-link>
                         </li>
                         <li>
-                            <router-link :to="'index'">4444444</router-link>
+                            <router-link :to="'recruit'" :style="{'color':headerBackground}">採用情報</router-link>
                         </li>
                         <li>
-                            <router-link :to="'index'">4444444</router-link>
+                            <router-link :to="'allCase'" :style="{'color':headerBackground}">案件概要</router-link>
                         </li>
                         <li>
-                            <router-link :to="'index'">4444444</router-link>
+                            <!-- 解决方案 -->
+                            <router-link :to="'service'" :style="{'color':headerBackground}">ソリューション</router-link>
+                        </li>
+                        <li>
+                            <router-link :to="'news'" :style="{'color':headerBackground}">NEWS</router-link>
+                        </li>
+                        <li>
+                            <router-link :to="'index'" :style="{'color':headerBackground}">問い合わせ</router-link>
                         </li>
                         <li class="lang-btn">
-                            <button type="button">ENGLISH</button>
+                            <button type="button" :style="{'color':headerBackground}">ENGLISH</button>
                         </li>
                     </ul>
                 </nav>
@@ -42,16 +49,22 @@
                     <div class="phone-nav-text-wrapper">
                         <ul>
                             <li>
-                                <router-link :to="'index'">4444444</router-link>
+                                <router-link :to="'company'">企業情報</router-link>
                             </li>
                             <li>
-                                <router-link :to="'index'">4444444</router-link>
+                                <router-link :to="'index'">採用情報</router-link>
                             </li>
                             <li>
-                                <router-link :to="'index'">4444444</router-link>
+                                <router-link :to="'allCase'">案件概要</router-link>
                             </li>
                             <li>
-                                <router-link :to="'index'">4444444</router-link>
+                                <router-link :to="'service'">ソリューション</router-link>
+                            </li>
+                            <li>
+                                <router-link :to="'news'">NEWS</router-link>
+                            </li>
+                            <li>
+                                <router-link :to="'index'">問い合わせ</router-link>
                             </li>
                         </ul>
                     </div>
@@ -63,14 +76,27 @@
 
 <script>
 export default {
+  props: {
+    headerBackground: {
+      default: '#ea5420',
+      type: String
+
+    }
+  },
   data() {
     return {
       isShowPhoneNav: false
     }
   },
+  created() {
+    console.log(this.headerBackground, 9999)
+  },
   methods: {
     toggle() {
       this.isShowPhoneNav = !this.isShowPhoneNav
+    },
+    handleJump(value) {
+      this.$router.push({ path: '/' })
     }
   }
 
