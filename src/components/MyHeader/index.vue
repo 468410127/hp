@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="header-fix" :class="{'navBarFix': fix}">
         <header class="header-wrapper" :class="{'open':isShowPhoneNav}">
             <div class="header">
                 <div class="header-logo">
@@ -14,26 +14,26 @@
                 <nav class="web-nav">
                     <ul>
                         <li>
-                            <router-link :to="'company'" :style="{'color':headerBackground}">企業情報</router-link>
+                            <router-link :to="'company'">企業情報</router-link>
                         </li>
                         <li>
-                            <router-link :to="'recruit'" :style="{'color':headerBackground}">採用情報</router-link>
+                            <router-link :to="'recruit'">採用情報</router-link>
                         </li>
                         <li>
-                            <router-link :to="'allCase'" :style="{'color':headerBackground}">案件概要</router-link>
+                            <router-link :to="'allCase'">案件概要</router-link>
                         </li>
                         <li>
                             <!-- 解决方案 -->
-                            <router-link :to="'service'" :style="{'color':headerBackground}">ソリューション</router-link>
+                            <router-link :to="'service'">ソリューション</router-link>
                         </li>
                         <li>
-                            <router-link :to="'news'" :style="{'color':headerBackground}">NEWS</router-link>
+                            <router-link :to="'news'">NEWS</router-link>
                         </li>
                         <li>
-                            <router-link :to="'index'" :style="{'color':headerBackground}">問い合わせ</router-link>
+                            <router-link :to="'index'">問い合わせ</router-link>
                         </li>
                         <li class="lang-btn">
-                            <button type="button" :style="{'color':headerBackground}">ENGLISH</button>
+                            <button type="button">ENGLISH</button>
                         </li>
                     </ul>
                 </nav>
@@ -81,6 +81,10 @@ export default {
       default: '#ea5420',
       type: String
 
+    },
+    fix: {
+      default: true,
+      type: Boolean
     }
   },
   data() {

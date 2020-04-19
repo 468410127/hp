@@ -223,30 +223,120 @@
                                         src="https://www.leadengine-wp.com/wp-content/uploads/2018/01/team1.jpg"
                                         alt
                                     />
+                                    <div class="person-info">
+                                        <h2>person name</h2>
+                                        <p>Develop</p>
+                                        <div class="socialmedia">
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="item">
                                     <img
                                         src="https://www.leadengine-wp.com/wp-content/uploads/2018/01/team3.jpg"
                                         alt
                                     />
+                                    <div class="person-info">
+                                        <h2>person name</h2>
+                                        <p>Develop</p>
+                                        <div class="socialmedia">
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="item active">
+                                <div class="item">
                                     <img
                                         src="https://www.leadengine-wp.com/wp-content/uploads/2018/01/team2.jpg"
                                         alt
                                     />
+                                    <div class="person-info">
+                                        <h2>person name</h2>
+                                        <p>Develop</p>
+                                        <div class="socialmedia">
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="item">
                                     <img
                                         src="https://www.leadengine-wp.com/wp-content/uploads/2018/01/team4.jpg"
                                         alt
                                     />
+                                    <div class="person-info">
+                                        <h2>person name</h2>
+                                        <p>Develop</p>
+                                        <div class="socialmedia">
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="item">
                                     <img
                                         src="https://www.leadengine-wp.com/wp-content/uploads/2018/01/team5.jpg"
                                         alt
                                     />
+                                    <div class="person-info">
+                                        <h2>person name</h2>
+                                        <p>Develop</p>
+                                        <div class="socialmedia">
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                            <a href="#">
+                                                <i class="icon el-icon-user" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -896,9 +986,17 @@ export default {
                         .panel-list {
                             display: flex;
                             .item {
-                                width: calc(100% / 5);
+                                // width: calc(100% / 5);
                                 // height: 300px;
                                 opacity: 0.5;
+                                flex: 1;
+                                cursor: pointer;
+                                overflow: hidden;
+                                transition: 0.6s;
+                                &:hover {
+                                    opacity: 1;
+                                }
+
                                 img {
                                     width: 100%;
                                     height: 100%;

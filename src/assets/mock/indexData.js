@@ -9,27 +9,33 @@ export const indexData = {
 	firstSection: [
 		{
 			tip: '创新、科技',
-			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。'
+			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。',
+			img: require('@/assets/images/banner/tech.jpg')
 		},
 		{
 			tip: '「見て・触れて・体感」',
-			title: '富士ソフト 秋葉原ショールーム,富士ソフトのさまざまなソリューションを見て・触れて・体感してください。'
+			title: '富士ソフト 秋葉原ショールーム,富士ソフトのさまざまなソリューションを見て・触れて・体感してください。',
+			img: require('@/assets/images/banner/tech2.jpg')
 		},
 		{
 			tip: '创新和科技',
-			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。'
+			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。',
+			img: require('@/assets/images/banner/tech.jpg')
 		},
 		{
 			tip: '専門サービス',
-			title: '最先端業務系ソリューショングローバル競争時代を勝ち抜くビジネスを支える、最適なソリューション'
+			title: '最先端業務系ソリューショングローバル競争時代を勝ち抜くビジネスを支える、最適なソリューション',
+			img: require('@/assets/images/banner/tech.jpg')
 		},
 		{
 			tip: '銀行',
-			title: 'セキュリティと安定稼働を絶対条件にリプレース、コストを抑えてVDI 導入をグループ全体に拡大'
+			title: 'セキュリティと安定稼働を絶対条件にリプレース、コストを抑えてVDI 導入をグループ全体に拡大',
+			img: require('@/assets/images/banner/tech.jpg')
 		},
 		{
 			tip: '電気機器',
-			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。'
+			title: 'インプラント型再生軟骨,富士ソフトは、インプラント型再生軟骨の,実用化に向けて取り組んでいます。',
+			img: require('@/assets/images/banner/tech.jpg')
 		}
 	],
 	secondsSection: {

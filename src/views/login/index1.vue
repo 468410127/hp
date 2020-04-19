@@ -1,11 +1,12 @@
 /* 首页 */
 <template>
     <div class="index-container">
+        <my-header header-background="#fff" :fix="navBarFixed" />
         <div class="section page-1">
-            <my-header header-background="#000" />
             <section class="index-wrap">
-                <el-carousel :interval="5000" arrow="always" :autoplay="false">
+                <el-carousel :interval="5000" arrow="always" :autoplay="true">
                     <el-carousel-item v-for="(item,index) in array" :key="index">
+                        <img :src="item.img" alt />
                         <div class="carousel-title container">
                             <div class="text">{{ item.tip }}</div>
                             <div class="title">{{ item.title }}</div>
@@ -141,20 +142,41 @@
                     <div class="panel-list">
                         <section class="panel">
                             <div class="back">
-                                <i class="icon el-icon-user" />
-                                <div class="name">Support</div>
+                                <div class="imgBx">
+                                    <img src="@/assets/images/test5.jpg" alt />
+                                </div>
+                                <div class="content">
+                                    <h4>感染人数</h4>
+                                    <p>特別な経営資源＝人」を見える化し、させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の</p>
+                                </div>
+                                <!-- <i class="icon el-icon-user" />
+                                <div class="name">Support</div>-->
                             </div>
                         </section>
                         <section class="panel">
                             <div class="back">
-                                <i class="icon el-icon-user" />
-                                <div class="name">Support</div>
+                                <div class="imgBx">
+                                    <img src="@/assets/images/test5.jpg" alt />
+                                </div>
+                                <div class="content">
+                                    <h4>感染人数</h4>
+                                    <p>特別な経営資源＝人」を見える化し、させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の</p>
+                                </div>
+                                <!-- <i class="icon el-icon-user" />
+                                <div class="name">Support</div>-->
                             </div>
                         </section>
                         <section class="panel">
                             <div class="back">
-                                <i class="icon el-icon-user" />
-                                <div class="name">Support</div>
+                                <div class="imgBx">
+                                    <img src="@/assets/images/test5.jpg" alt />
+                                </div>
+                                <div class="content">
+                                    <h4>感染人数</h4>
+                                    <p>特別な経営資源＝人」を見える化し、させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の特別な経営資源＝人」を見える化し、人材と事業戦略を整合させる真の</p>
+                                </div>
+                                <!-- <i class="icon el-icon-user" />
+                                <div class="name">Support</div>-->
                             </div>
                         </section>
                     </div>
@@ -206,19 +228,6 @@ export default {
       allAboutData: [],
       caseList: [],
       newsData: [],
-      options: {
-        // licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-        afterLoad: this.afterLoad,
-        scrollOverflow: true,
-        scrollBar: false,
-        autoscroll: false,
-        menu: '#menu',
-        lazyLoading: false,
-        scrollingSpeed: 300,
-        easing: 'easeInOutCubic',
-        css3: true,
-        sectionsColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#000']
-      },
       styleValue: '',
       isShowPhoneNav: false,
       array: [],
@@ -227,10 +236,9 @@ export default {
 
       isChoose: false,
       currentIndex: -1,
-      height: 0,
-      mouseX: 0,
-      mouseY: 0,
-      isMobile: navigator.userAgent
+
+      isMobile: navigator.userAgent,
+      navBarFixed: false
 
     }
   },
@@ -250,6 +258,7 @@ export default {
     setTimeout(() => {
       this.isHidden = false
     }, 500)
+    window.addEventListener('scroll', this.watchScroll)
   },
   created() {
     const data = indexData
@@ -263,6 +272,15 @@ export default {
     this.newsData = data.fiveSection.newsList
   },
   methods: {
+    watchScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      //  当滚动超过 50 时，实现吸顶效果
+      if (scrollTop > 49) {
+        this.navBarFixed = true
+      } else {
+        this.navBarFixed = false
+      }
+    },
 
     toggleShow(index) {
     //   this.isChoose = !this.isChoose
@@ -315,39 +333,8 @@ export default {
                 height: 100%;
             }
             /deep/ .el-carousel__item {
-                opacity: 0.4;
+                opacity: 1;
             }
-            /deep/ .el-carousel__item:nth-child(2) {
-                background: url("../../assets/images/carousel.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-            /deep/ .el-carousel__item:nth-child(3) {
-                background: url("../../assets/images/carousel.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-            /deep/ .el-carousel__item:nth-child(4) {
-                background: url("../../assets/images/carousel2.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-            /deep/ .el-carousel__item:nth-child(5) {
-                background: url("../../assets/images/carousel3.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-            /deep/ .el-carousel__item:nth-child(6) {
-                background: url("../../assets/images/carousel4.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-            /deep/ .el-carousel__item:nth-child(7) {
-                background: url("../../assets/images/carousel5.jpg") no-repeat;
-                background-size: cover;
-                box-sizing: border-box;
-            }
-
             /deep/ .el-carousel__item .carousel-title {
                 text-align: center;
                 position: relative;
@@ -374,7 +361,7 @@ export default {
                     margin-right: 5px;
                     font-weight: 700;
                     font-size: 50px;
-                    color: #000;
+                    color: #fff;
                     opacity: 1;
                     transition: all 2.5s ease;
                 }
@@ -426,16 +413,9 @@ export default {
     .page-2 {
         width: 100%;
         min-height: 100vh;
-        // height: 100%;
         box-sizing: border-box;
         position: relative;
         .second-wrap {
-            // width: 100%;
-            // height: 50%;
-            // // background: #000;
-            // position: absolute;
-            // top: 0;
-            // left: 0;
             .first-wrap {
                 padding: 40px 0;
                 width: 60%;
@@ -693,6 +673,8 @@ export default {
             .item {
                 display: flex;
                 height: 100%;
+                padding: 0 20px;
+                box-sizing: border-box;
                 .left {
                     width: 60%;
                     height: 100%;
@@ -765,6 +747,8 @@ export default {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
+                padding: 0 20px;
+                box-sizing: border-box;
 
                 .item {
                     width: 23.5%;
@@ -1011,7 +995,7 @@ export default {
                     .panel {
                         width: 32%;
                         margin-right: 5%;
-                        height: 160px;
+                        height: 250px;
                         display: flex;
                         // background: #fff;
                         text-align: left;
@@ -1021,36 +1005,97 @@ export default {
                         cursor: pointer;
                         border-radius: 4px;
                         border: 1px solid #e5e7f2;
-                        padding: 30px;
+                        // padding: 30px;
                         margin-bottom: 30px;
                         // overflow: hidden;
                         // padding-bottom: 0;
                         box-sizing: border-box;
                         .back {
-                            .icon {
-                                margin: 0 auto;
-                                border: 1px solid #e5e7f2;
-                                text-align: center;
-                                border-radius: 4px;
-                                font-size: 36px;
-                                transition: all 250ms ease-in-out;
-                                box-shadow: 0 0 27px 0 rgba(0, 0, 0, 0.045);
-                                width: 64px;
-                                height: 64px;
-                                line-height: 64px;
-                                margin-bottom: 25px;
-                                color: $activeColor;
+                            // .icon {
+                            //     margin: 0 auto;
+                            //     border: 1px solid #e5e7f2;
+                            //     text-align: center;
+                            //     border-radius: 4px;
+                            //     font-size: 36px;
+                            //     transition: all 250ms ease-in-out;
+                            //     box-shadow: 0 0 27px 0 rgba(0, 0, 0, 0.045);
+                            //     width: 64px;
+                            //     height: 64px;
+                            //     line-height: 64px;
+                            //     margin-bottom: 25px;
+                            //     color: $activeColor;
+                            // }
+                            // .name {
+
+                            //     font-size: 20px;
+
+                            // }
+                            width: 100%;
+                            height: 100%;
+                            background: #000;
+                            position: relative;
+                            .imgBx {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                img {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    transition: 0.5s;
+                                }
                             }
-                            .name {
-                                // color: red;
-                                font-size: 20px;
-                                // padding-bottom: 10px;
+                            .content {
+                                position: absolute;
+                                bottom: 20px;
+                                left: 10%;
+                                width: 80%;
+                                height: 60px;
+                                background: #fff;
+                                transition: 0.5s;
+                                overflow: hidden;
+                                padding: 15px;
+                                box-sizing: border-box;
+                                h4 {
+                                    font-size: 20px;
+                                    margin-bottom: 10px;
+                                }
+                                p {
+                                    font-size: 18px;
+                                    line-height: 1.2em;
+                                    transition: 0.5s;
+                                    text-align: justify;
+                                    opacity: 0;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
                             }
                         }
 
                         img {
                             height: 100%;
                             width: 100%;
+                        }
+                        .back:hover {
+                            .imgBx {
+                                img {
+                                    opacity: 0;
+                                }
+                            }
+                            .content {
+                                width: 100%;
+                                height: 100%;
+                                bottom: 0;
+                                left: 0;
+                                p {
+                                    opacity: 1;
+                                }
+                            }
                         }
                     }
                 }
