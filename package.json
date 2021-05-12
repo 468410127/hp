@@ -25,7 +25,7 @@
 		"mv-full-page": "^1.0.14",
 		"normalize.css": "^8.0.1",
 		"nprogress": "^0.2.0",
-		"swiper": "^5.3.6",
+		"swiper": "^6.5.1",
 		"vue": "^2.6.10",
 		"vue-awesome-swiper": "^4.1.0",
 		"vue-canvas-effect": "0.0.12",
